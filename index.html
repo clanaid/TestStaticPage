@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <title>TestTZ</title>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+  </head>
+  <body>
+    <h3>TZ: <span id="tz"></span></h3>
+    <h3>TZ2: <span id="tz2"></span></h3>
+  </body>
+  <script>
+    document.getElementById("tz").innerText = moment.tz.guess();
+    document.getElementById("tz2").innerText = moment.tz.guess(true);
+  </script>
+</html>

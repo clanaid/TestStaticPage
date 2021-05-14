@@ -3,13 +3,25 @@
     <title>TestTZ</title>
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/dayjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/utc.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.4/plugin/timezone.min.js"></script>
   </head>
   <body>
-    <h3>TZ: <span id="tz"></span></h3>
-    <h3>TZ2: <span id="tz2"></span></h3>
+    <h3>Intl: <span id="intl"></span></h3>
+    <h3>Moment-TZ: <span id="tz"></span></h3>
+    <h3>Moment-TZ2: <span id="tz2"></span></h3>
+    <h3>Dayjs-TZ: <span id="dayjs-tz"></span></h3>
+    <h3>Offset: <span id="offset"></span></h3>
   </body>
   <script>
+    dayjs.extend(window.dayjs_plugin_utc);
+    dayjs.extend(window.dayjs_plugin_timezone);
+    document.getElementById("intl").innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById("tz").innerText = moment.tz.guess();
     document.getElementById("tz2").innerText = moment.tz.guess(true);
+    document.getElementById("dayjs-tz").innerText = dayjs.tz.guess();
+    document.getElementById("offset").innerText = 0-(new Date().getTimezoneOffset()/60);
+    document.getElementById("offset").innerText = 0-(new Date().getTimezoneOffset()/60);
   </script>
 </html>

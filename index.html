@@ -17,11 +17,21 @@
   <script>
     dayjs.extend(window.dayjs_plugin_utc);
     dayjs.extend(window.dayjs_plugin_timezone);
+    dayjs.tz.setDefault("Asia/Shanghai");
+    moment.tz.setDefault("Asia/Shanghai");
     document.getElementById("intl").innerText = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById("tz").innerText = moment.tz.guess();
     document.getElementById("tz2").innerText = moment.tz.guess(true);
     document.getElementById("dayjs-tz").innerText = dayjs.tz.guess();
-    document.getElementById("offset").innerText = 0-(new Date().getTimezoneOffset()/60);
-    document.getElementById("offset").innerText = 0-(new Date().getTimezoneOffset()/60);
+    document.getElementById("offset").innerText = new Date().getTimezoneOffset();
+
+    function findZone(offset){
+      console.log('offset',offset)
+      const countries = moment.tz.countries();
+      for (const country of countries) {
+        const rst = moment.tz.zonesForCountry(country, true).find(zone => zone.offset === offset)
+        if(rst) return rst
+      }
+    }
   </script>
 </html>
